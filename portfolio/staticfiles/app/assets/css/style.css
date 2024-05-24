@@ -1478,6 +1478,7 @@ a {
   border-radius: 10px;
   transition: ease all 0.35s;
   opacity: 0;
+  margin-inline-start: -20px;
 }
 .portfolio-box .portfolio-text h6 {
   font-size: 17px;
