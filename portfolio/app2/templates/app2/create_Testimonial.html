@@ -1,0 +1,85 @@
+{% extends 'app2/base.html' %}
+{% load static %}
+{% block title %} 
+Testimonials
+{% endblock %}
+{% block body %}
+            <!-- Start Page Content here -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">Testimonial</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                       <form method="post" enctype="multipart/form-data" action="{% if instance %}{% url 'dashboard:edit_Testimonial'  instance.id %}{% else %}{% url 'dashboard:add_Testimonial' %}{% endif %}">
+                                          {% csrf_token %}
+                                          {{form.media}}
+                                          {% if messages %}
+                                          {% for msg in messages %}
+                                              <div class="alert alert-{{ msg.tags }} alert-dismissible text-bg-{{ msg.tags }} border-0 fade show" role="alert">
+                                                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                  <strong>{% if msg.tags == 'success' %}Success{% elif msg.tags == 'warning' %}Warning{% endif %} - </strong>{{ msg.message }}
+                                              </div>
+                                          {% endfor %}
+                                      {% endif %}
+                                       <div class="row">
+                                          <!-- input -->
+                                          <div class="col-xl-6">
+                                          <div class="mb-3">
+                                             <label class="form-label">Name</label>
+                                             <input type="text" name="{{ form.name.name }}" id="{{ form.name.id_for_label }}" class="form-control"
+                                             value="{% if instance %}{{ instance.name }}{% endif %}" placeholder="Enter name">
+                                          </div>
+            
+                                        
+                                        <div class="mb-3">
+                                            <label for="{{ form.image.id_for_label }}" class="form-label">Image :</label>
+                                            <input type="file" name="{{ form.image.name }}" id="{{ form.image.id_for_label }}" class="form-control" {% if not instance %}required{% endif %} onchange="showPreview(this);">
+                                            <div id="imageContainer" style="width:auto; height:auto;">
+                                                <img class="img-fluid" id="imagePreview" src="{% if instance %}{{ instance.image.url }}{% endif %}" alt="" >
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                          <!-- input -->
+                                        </div>
+                                        <div class="col-xl-6">
+
+                                            <div class="mb-3">
+                                                <label for="{{form.description.id_for_label }}" class="form-label">Description</label>
+                                                <textarea name="{{form.description.name }}" id="{{form.description.id_for_label }}" class="form-control" required placeholder="Enter description">{% if form.instance %}{{ form.instance.description }}{% endif %}</textarea>
+                                            </div>
+                                        </div>
+                                          <div class="col-lg-12">
+                                             {% if instance %}
+                                             <button type="submit" class="btn btn-primary">Update</button>
+                                         {% else %}
+                                             <button type="submit" class="btn btn-primary">Add</button>
+                                         {% endif %}
+                                        </div>
+                                       </div>
+                                       </form>
+                        
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+
+      {% endblock %}

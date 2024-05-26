@@ -203,6 +203,100 @@ class ContactDeleteView(View):
         return redirect('dashboard:Contact')
 
 
+@login_required 
+def add_edit_Testimonial(request, id=None):
+    instance = None
+    try:
+        if id:
+            instance = Testimonial.objects.get(pk=id)
+    except Exception as e:
+        messages.warning(request, 'An error occurred while retrieving the Testimonial.')
+        return redirect('dashboard:add_Testimonial')
+    if request.method == 'POST':
+        form = TestimonialForm(request.POST, request.FILES, instance=instance)
+        if form.is_valid():
+            form.save()
+            if instance:  # Edit operation
+                messages.success(request, 'Testimonial edited successfully.')
+                return redirect('dashboard:edit_Testimonial', id=instance.id)  # Redirect to the edited Testimonial's details page
+            else:  # Add operation
+                messages.success(request, 'Testimonial added successfully.')
+                return redirect('dashboard:add_Testimonial')  # Redirect to the page for adding new Testimonials
+        else:
+            messages.warning(request, 'Form is not valid. Please correct the errors.')
+    else:
+        form = TestimonialForm(instance=instance)
+    context = {'form': form, 'instance': instance}
+    return render(request, 'app2/create_Testimonial.html', context)
+
+class TestimonialListView(View):
+    template_name = 'app2/Testimonial.html'
+    def get(self, request):
+        prod = Testimonial.objects.all()
+   
+        return render(request, self.template_name, {'details': prod})
+
+class TestimonialDeleteView(View):
+    template_name = 'app2/Testimonial.html'
+    def get(self, request, id):
+        record = get_object_or_404(Testimonial, id=id)
+        return render(request, self.template_name, {'details': record})
+    def post(self, request, id):
+        record = get_object_or_404(Testimonial, id=id)
+        record.delete()
+        return redirect('dashboard:Testimonial')
+
+
+
+
+@login_required 
+def add_edit_Appointment(request, id=None):
+    instance = None
+    try:
+        if id:
+            instance = Appointment.objects.get(pk=id)
+    except Exception as e:
+        messages.warning(request, 'An error occurred while retrieving the Appointment.')
+        return redirect('dashboard:add_Appointment')
+    if request.method == 'POST':
+        form = AppointmentForm(request.POST, request.FILES, instance=instance)
+        if form.is_valid():
+            form.save()
+            if instance:  # Edit operation
+                messages.success(request, 'Appointment edited successfully.')
+                return redirect('dashboard:edit_Appointment', id=instance.id)  # Redirect to the edited Appointment's details page
+            else:  # Add operation
+                messages.success(request, 'Appointment added successfully.')
+                return redirect('dashboard:add_Appointment')  # Redirect to the page for adding new Appointments
+        else:
+            messages.warning(request, 'Form is not valid. Please correct the errors.')
+    else:
+        form = AppointmentForm(instance=instance)
+    context = {'form': form, 'instance': instance}
+    return render(request, 'app2/create_Appointment.html', context)
+
+class AppointmentListView(View):
+    template_name = 'app2/Appointment.html'
+    def get(self, request):
+        prod = Appointment.objects.all()
+   
+        return render(request, self.template_name, {'details': prod})
+
+class AppointmentDeleteView(View):
+    template_name = 'app2/Appointment.html'
+    def get(self, request, id):
+        record = get_object_or_404(Appointment, id=id)
+        return render(request, self.template_name, {'details': record})
+    def post(self, request, id):
+        record = get_object_or_404(Appointment, id=id)
+        record.delete()
+        return redirect('dashboard:Appointment')
+
+
+
+
+
+
 # for logout
 # def userlogout(request):
 #     auth.logout(request)

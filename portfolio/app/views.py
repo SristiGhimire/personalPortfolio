@@ -5,13 +5,15 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from .forms import *
 
+
 def index(request):
     contact = Contact.objects.all()
     about = About.objects.first()
     album = Album.objects.all()
     personaldetail = PersonalDetail.objects.first()
     service = Service.objects.all()
-    context = {"contact":contact, "about":about, "album":album, "personaldetail": personaldetail, "service": service}
+    testimonial = Testimonial.objects.all()
+    context = {"contact":contact, "about":about, "album":album, "personaldetail": personaldetail, "service": service, "testimonial":testimonial}
     return render(request, 'app/index.html', context)
 
 def contact(request):
@@ -37,9 +39,20 @@ def appointment(request):
     if request.method == 'POST':
         form = AppointmentForm(request.POST)
         if form.is_valid():
-            form.save()
+            name = form.cleaned_data['name']
+            phone = form.cleaned_data['phone']
+            startdate = form.cleaned_data['startdate']
+
+            book = Appointment.objects.create(
+                name=name,
+                phone=phone,
+                startdate=startdate,
+                )
+
+            book.save()
             return redirect('app:index')
     else:
         form = AppointmentForm()
-    
-    return render(request, 'app/index.html', {'form': form})
+        return render(request, 'app/index.html',{'form': form})
+
+

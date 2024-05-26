@@ -70,10 +70,36 @@ class About(models.Model):
         return self.title
 
 class Appointment(models.Model):
+    name=models.CharField(max_length=50)
+    phone = models.IntegerField()
     startdate=models.DateTimeField()
 
     def __str__(self):
-        return self.startdate
+        return self.name
+
+class Client(models.Model):
+    title = models.CharField(max_length=200)
+    time = models.CharField(max_length= 200)
+    name = models.CharField(max_length=200)
+    icon = models.FileField(upload_to="clientIconimage")
+    description = RichTextField()
+
+    def __str__(self):
+        return self.name
+
+
+class Testimonial(models.Model):
+    name = models.CharField(max_length=200)
+    image = models.ImageField(upload_to="testimonialimage")
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+
+
+
+
 
 
 

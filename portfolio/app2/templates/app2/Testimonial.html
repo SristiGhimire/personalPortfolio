@@ -2,10 +2,10 @@
 {% extends 'app2/base.html' %}
 {% load static %}
 {% block title %} 
-Appointments
+Testimonial
 {% endblock %}
 {% block body %}
-<title>Documentation</title>
+<title>Testimonial</title>
 
             <!-- ============================================================== -->
             <!-- Start Page Content here -->
@@ -22,7 +22,7 @@ Appointments
                             <div class="col-12">
                                 <div class="page-title-box">
                                   
-                                    <h4 class="page-title">Booked Appoinments</h4>
+                                    <h4 class="page-title">Testimonial</h4>
                                 </div>
                             </div>
                         </div>
@@ -32,25 +32,57 @@ Appointments
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
+                                        <div class="row mb-2">
+                                            <div class="col-sm-4">
+                                                <a href="{% url 'dashboard:add_Testimonial' %}" class="btn btn-danger rounded-pill mb-3"><i class="mdi mdi-plus"></i>Add Testimonial</a>
+                                            </div>
+                                        </div>
+                                        
+
                                         <div class="table-responsive"style="overflow-x: auto; width: 100%;" >
-                                            <table class="table table-striped dt-responsive w-100 " id="">
+                                            <table class="table table-striped dt-responsive w-100 " id=""  >
+                                                    <tr>
+                                                       
+                                                      
                                                         <th >Id</th>
-                                                        <th>StartDate</th>
+                                                        <th >Name</th>
+                                                        <th>Image</th>
+                                                        <th >Description</th>
                                                         <th style="width: 120px;">Action</th>
                                                     </tr>
                                       {%for item in details%}
 
                                         <tr>
+                                                            
+
+                                  
                                             <td>
                                                 {{forloop.counter}}
                                             </td>
                                             <td>
-                                                {{item.startdate}}
+                                                {{item.name}}
                                             </td>
+                                            <td>
+                                                <div class="image-gallery">
+                                                    <img class="thumbnail" src="{{item.image.url}}" alt="Thumbnail Image">
+                                                    <!-- Add more thumbnail images here if you have multiple images in the gallery -->
+                                                </div>
+                                                <div class="modal" id="imageModal">
+                                                    <span class="close-btn" onclick="closeModal()">&times;</span>
+                                                    <img class="modal-content" id="modalImage">
+                                                </div>
+                                            
+                                                <script src="script.js"></script>
+                                            </td>
+                                    
+                                            <td>
+                                                {{item.description|safe|truncatechars:40}}
+                                            </td>
+
                                             
                                             <td style ="display:inline-block; margin-right:5px;" >
-                                                {% comment %} <a href="{% url 'dashboard:edit_Appointment' item.id %}" class="font-18 text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="uil uil-pen"></i></a> {% endcomment %}
-                                                <a href="#AppointmentDeleteModel{{item.id}}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                                <a href="{% url 'dashboard:edit_Testimonial' item.id %}" class="font-18 text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="uil uil-pen"></i></a>
+                                                <a href="#TestimonialDeleteModel{{item.id}}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                             </td>
                                          
                                         </tr>
@@ -101,16 +133,16 @@ Appointments
    
     {% block content %}
     {% for item in details %}
-        <div class="modal fade"  id="AppointmentDeleteModel{{item.id}}"  tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal fade"  id="TestimonialDeleteModel{{item.id}}"  tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content custom-modal">
                         <div class="modal-footer">
-                            Are you sure you want to delete this Appointment Id Number #{{ item.id }}
+                            Are you sure you want to delete this Testimonial Id Number #{{ item.id }}
                           
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <form method="post" action="{% url 'dashboard:deleteAppointment' item.id %}">
+                            <form method="post" action="{% url 'dashboard:deleteTestimonial' item.id%}">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
@@ -135,8 +167,10 @@ Appointments
 
                     <script>
                         $(document).ready(function () {
-                            $('#AppointmentdeleteModal').modal('show');
+                            $('#TestimonialdeleteModal').modal('show');
                         });
                     </script>
                     {% endblock %}
+              
 {%endblock%}
+  

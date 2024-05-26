@@ -6,4 +6,11 @@ admin.site.register(About)
 admin.site.register(Album)
 admin.site.register(Gallery)
 admin.site.register(Contact)
-admin.site.register(Appointment)
+admin.site.register(Client)
+admin.site.register(Testimonial)
+
+
+class AppointmentAdmin(admin.ModelAdmin):
+    list_display = ['name', 'phone', 'startdate'] 
+
+admin.site.register(Appointment, AppointmentAdmin)

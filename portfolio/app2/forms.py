@@ -16,5 +16,15 @@ class PersonalDetailForm(forms.ModelForm):
     class Meta:
         model = PersonalDetail
         fields = '__all__'
-    
+
+class TestimonialForm(forms.ModelForm):
+    class Meta:
+        model = Testimonial
+        fields = '__all__'
+
+
+class AppointmentForm(forms.ModelForm):
+    class Meta:
+        model = Appointment
+        fields = '__all__'
 
