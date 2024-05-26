@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from .models import *
 from django.core.mail import send_mail
 from django.conf import settings 
 from django.contrib.auth.models import User
+from .forms import *
 
 def index(request):
     contact = Contact.objects.all()
@@ -31,3 +32,14 @@ def contact(request):
         return redirect('app:index') 
     else:
         return render(request, 'app/index.html')
+
+def appointment(request):
+    if request.method == 'POST':
+        form = AppointmentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('app:index')
+    else:
+        form = AppointmentForm()
+    
+    return render(request, 'app/index.html', {'form': form})

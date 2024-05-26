@@ -107,14 +107,32 @@
                             <h1>{{personaldetail.firstName}}<span><img src="{% static 'app/assets/img/mask.jpg' %}" title="" alt=""></span>{{personaldetail.lastName}}</h1>
                             <p class="pe-lg-5">We work with professionals and leaders who want to build careers that fulfil them intellectually, financially</p>
                             <div class="btn-bar">
-                                <a class="px-btn px-btn-theme" href="#appointment">Book Appointment<i class="fas fa-calendar-check icon"></i> </a>
-                                <section id="appointment">
-                                <div class="mb-3">
-                                    <label class="form-label" for="{{form.startdate.id_for_label}}"></label>
-                                    <input type="datetime-local" name="{{form.startdate.name }}" id="form.startdate.id_for_label" class="form-control" required value="{% if form.instance %}{{ form.instance.startdate }}{% endif %}" placeholder="Enter start date">
-                                </div>
-                                </section>
+                                <a id="book-appointment-btn" class="px-btn px-btn-theme" href="javascript:void(0);">
+                                    Book Appointment for digital marketing<i class="fas fa-calendar-check icon"></i>
+                                </a>
+                                <form id="appointment-form"  method="POST" action="{% url 'app:appointment' %}" style="display: none;">
+                                    {% csrf_token %}
+                                    <section id="appointment">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="startdate">Book date and time</label>
+                                            <input type="datetime-local"  style="background-color: white;" name="startdate" id="startdate" class="form-control" required>
+                                        </div>
+                                        <button type="submit" class="px-btn px-btn-theme">Submit Appointment</button>
+                                    </section>
+                                </form>
                             </div>
+                            
+                            <script>
+                                document.getElementById('book-appointment-btn').addEventListener('click', function() {
+                                    // Hide the book appointment button
+                                    this.style.display = 'none';
+                                    // Show the appointment form
+                                    document.getElementById('appointment-form').style.display = 'block';
+                                });
+                            </script>
+                            
+                            
+                            
                         </div>
                     </div>
                     <div class="col-lg-6">
