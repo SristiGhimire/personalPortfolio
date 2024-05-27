@@ -8,6 +8,8 @@ admin.site.register(Gallery)
 admin.site.register(Contact)
 admin.site.register(Client)
 admin.site.register(Testimonial)
+admin.site.register(CompanyDescription)
+admin.site.register(Herobanner)
 
 
 class AppointmentAdmin(admin.ModelAdmin):

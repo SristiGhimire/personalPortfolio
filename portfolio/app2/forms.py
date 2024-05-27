@@ -28,3 +28,25 @@ class AppointmentForm(forms.ModelForm):
         model = Appointment
         fields = '__all__'
 
+
+class GalleryForm(forms.ModelForm):
+    class Meta:
+        model = Gallery
+        fields = '__all__'
+
+class AlbumForm(forms.ModelForm):
+    class Meta:
+        model = Album
+        fields = '__all__'
+
+
+class CompanyDescriptionForm(forms.ModelForm):
+    class Meta:
+        model = CompanyDescription
+        fields = '__all__'
+
+class HerobannerForm(forms.ModelForm):
+    class Meta:
+        model = Herobanner
+        fields = '__all__'
+

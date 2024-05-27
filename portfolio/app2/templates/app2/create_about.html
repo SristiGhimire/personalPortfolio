@@ -67,6 +67,18 @@ About
                                         </div>
                                         <div class="col-xl-6">
 
+                                            <div class="mb-3">
+                                                <label class="form-label">Number of Completed Projects</label>
+                                                <input type="text" name="{{ form.completedProject.name }}" id="{{ form.completedProject.id_for_label }}" class="form-control"
+                                                value="{% if instance %}{{ instance.completedProject }}{% endif %}" placeholder="Enter completedProject">
+                                             </div>
+
+                                             <div class="mb-3">
+                                                <label class="form-label">Number of Satisfied Clients</label>
+                                                <input type="text" name="{{ form.satisfiedClient.name }}" id="{{ form.satisfiedClient.id_for_label }}" class="form-control"
+                                                value="{% if instance %}{{ instance.satisfiedClient }}{% endif %}" placeholder="Enter satisfiedClient">
+                                             </div>
+
                                           <div class="mb-3">
                                              <label class="form-label">Description</label>
                                             {{form.description}}

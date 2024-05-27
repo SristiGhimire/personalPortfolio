@@ -96,6 +96,19 @@
         </ul>
     </div>
     <!-- Main -->
+    <style>
+        /* Change the placeholder color */
+        #appointment input::placeholder {
+            color: #bfbfbf; /* Change this to your desired color */
+            opacity: 1; /* Ensures that the color is fully opaque */
+        }
+
+        /* Optional: Change the background color of the input fields */
+        #appointment input {
+            background-color: #3c3c3c;
+            color: #ffffff; /* Change the text color to match the placeholder if desired */
+        }
+    </style>
     <main class="wrapper">
         <!-- Home -->
         <section id="home" data-scroll-index="0" class="home-section">
@@ -103,9 +116,9 @@
                 <div class="row align-items-center min-vh-100 flex-row-reverse">
                     <div class="col-lg-6 ps-xl-5 mb-5 mb-lg-0">
                         <div class="home-intro">
-                            <h6>👋 Hi, I’ m</h6>
-                            <h1>{{personaldetail.firstName}}<span><img src="{% static 'app/assets/img/mask.jpg' %}" title="" alt=""></span>{{personaldetail.lastName}}</h1>
-                            <p class="pe-lg-5">We work with professionals and leaders who want to build careers that fulfil them intellectually, financially</p>
+                            <h6>👋 {{herobanner.subDescription}}</h6>
+                            <h1>{{personaldetail.firstName}}<span><img src="{{herobanner.smallImage.url}}" title="" alt=""></span>{{personaldetail.lastName}}</h1>
+                            <p class="pe-lg-5">{{herobanner.description}}</p>
                             <div class="btn-bar">
                                 <a id="book-appointment-btn" class="px-btn px-btn-theme" href="javascript:void(0);">
                                     Book Appointment for digital marketing<i class="fas fa-calendar-check icon"></i>
@@ -116,15 +129,15 @@
                                         <section id="appointment">
                                             <div class="mb-3">
                                                 <label class="form-label" for="name">Name</label>
-                                                <input type="text" style="" placeholder="Enter name" name="name" id="name" class="form-control" required>
+                                                <input type="text" placeholder="Enter name" name="name" id="name" class="form-control" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label" for="phone">Contact Number</label>
-                                                <input type="number" style="" name="phone" placeholder="Enter Contact number" id="phone" class="form-control" required>
+                                                <input type="number" name="phone" placeholder="Enter Contact number" id="phone" class="form-control" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label" for="startdate">Book date and time</label>
-                                                <input type="datetime-local" style="" name="startdate" id="startdate" class="form-control" required>
+                                                <input type="datetime-local" name="startdate" id="startdate" class="form-control" required>
                                             </div>
                                             <button type="submit" class="px-btn px-btn-theme">Book Appointment</button>
                                         </section>
@@ -178,13 +191,13 @@
                                 <div class="row pt-2">
                                     <div class="col-auto">
                                         <div class="a-count">
-                                            <span class="count">5k</span>
+                                            <span class="count">{{about.completedProject}}</span>
                                             <div class="a-count-text">Projects <br>Completed.</div>
                                         </div>
                                     </div>
                                     <div class="col-auto">
                                         <div class="a-count">
-                                            <span class="count">3k</span>
+                                            <span class="count">{{about.satisfiedClient}}</span>
                                             <div class="a-count-text">Satisfied <br>Clients.</div>
                                         </div>
                                     </div>
@@ -192,34 +205,20 @@
                             </div>
                             <hr>
                             <div class="title-01 mt-5">
-                                <span>Experience</span>
+                                <span>Company Description</span>
                             </div>
                             <div class="resume-box">
                                 <ul>
+                                    {% for item in company %}
                                     <li>
                                         <div class="icon">
-                                            <i class="fas fa-briefcase"></i>
+                                            <img src="{{item.icon.url}}" title="" alt="">
                                         </div>
-                                        <span class="time">2019 - Present</span>
-                                        <h5>Art Director - Facebook Inc</h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <span class="time">{{item.time}}</span>
+                                        <h5>{{item.title}}</h5>
+                                        <p>{{item.description}}</p>
                                     </li>
-                                    <li>
-                                        <div class="icon">
-                                            <i class="fas fa-briefcase"></i>
-                                        </div>
-                                        <span class="time">2019 - Present</span>
-                                        <h5>Art Director - Facebook Inc</h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <i class="fas fa-briefcase"></i>
-                                        </div>
-                                        <span class="time">2019 - Present</span>
-                                        <h5>Art Director - Facebook Inc</h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    </li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
@@ -346,288 +345,366 @@
             </div>
         </section>
         <!-- End Services -->
-        <!-- portfolio -->
+<!-- portfolio -->
 
-        <style>
-            .portfolio-box {
-                position: relative;
-                overflow: hidden;
-            }
-            .portfolio-text {
-                position: absolute;
-                bottom: 0;
-                background: rgba(0, 0, 0, 0.5);
-                color: #fff;
-                width: 100%;
-                padding: 10px;
-            }
-            .portfolio-img {
-                width: 100%;
-            }
-            .carousel-control-prev-icon,
-            .carousel-control-next-icon {
-                background-color: black;
-            }
+<style>
+    .portfolio-box {
+        position: relative;
+        overflow: hidden;
+    }
+    .portfolio-text {
+        position: absolute;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        width: 100%;
+        padding: 10px;
+    }
+    .portfolio-img {
+        width: 100%;
+    }
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-color: black;
+    }
 
-        
-        </style>
 
-        <section id="portfolio" data-scroll-index="3" class="section portfolio-section gray-bg-1">
-            <div class="container">
-                <div class="section-heading">
-                    <h3><span>My Portfolio</span></h3>
-                </div>
-                <div class="lightbox-gallery">
-                    <div class="row g-3 g-lg-4 portfolio-content">
-                        {% for album in album %}
-                        <!-- Portfolio Item -->
-                        <div class="col-sm-6 col-lg-4 grid-item">
-                            <div class="portfolio-box">
-                                <div class="portfolio-text">
-                                    <h6>{{ album.title }}</h6>
-                                    <p>{{ album.get_description_display }}</p>
-                                    <a class="gallery-link" href="#" data-toggle="modal" data-target="#portfolioModal{{ album.id }}"><i class="bi-arrow-up-right-circle"></i></a>
-                                </div>
-                                <div class="portfolio-img">
-                                    <img src="{{ album.image.url }}" title="{{ album.title }}" alt="" style="height:250px; width: 400px; ">
-                                </div>
-                            </div>
+</style>
+
+<section id="portfolio" data-scroll-index="3" class="section portfolio-section gray-bg-1">
+    <div class="container">
+        <div class="section-heading">
+            <h3><span>My Portfolio</span></h3>
+        </div>
+        <div class="lightbox-gallery">
+            <div class="row g-3 g-lg-4 portfolio-content">
+                {% for item in album %}
+                <!-- Portfolio Item -->
+                <div class="col-sm-6 col-lg-4 grid-item">
+                    <div class="portfolio-box">
+                        <div class="portfolio-text">
+                            <h6>{{ item.title }}</h6>
+                            {% comment %} <p>{{ item.get_description_display }}</p> {% endcomment %}
+                            <a class="gallery-link" href="#" data-toggle="modal" data-target="#portfolioModal{{ item.id }}"><i class="bi-arrow-up-right-circle"></i></a>
                         </div>
-        
-                        <!-- Modal -->
-                        <div class="modal fade" id="portfolioModal{{ album.id }}" tabindex="-1" aria-labelledby="portfolioModalLabel{{ album.id }}" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="portfolioModalLabel{{ album.id }}">{{ album.title }}</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div id="portfolioCarousel{{ album.id }}" class="carousel slide" data-ride="carousel">
-                                            <div class="carousel-inner">
-                                                {% for gallery_item in album.hostings.all %}
-                                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                                    <img src="{{ gallery_item.image.url }}" class="d-block w-100" style="height: 500px; width: 200px; object-fit:cover;" alt="...">
-                                                </div>
-                                                {% endfor %}
-                                            </div>
-                                            <a class="carousel-control-prev" href="#portfolioCarousel{{ album.id }}" role="button" data-slide="prev">
-                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                <span class="sr-only">Previous</span>
-                                            </a>
-                                            <a class="carousel-control-next" href="#portfolioCarousel{{ album.id }}" role="button" data-slide="next">
-                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                <span class="sr-only">Next</span>
-                                            </a>
+                        <div class="portfolio-img">
+                            <img src="{{ item.image.url }}" title="{{ item.title }}" alt="" style="height:250px; width: 400px; ">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="portfolioModal{{ item.id }}" tabindex="-1" aria-labelledby="portfolioModalLabel{{ item.id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="portfolioModalLabel{{ item.id }}">{{ item.title }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="portfolioCarousel{{ item.id }}" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                        {% for album_item in item.albums.all %}
+                                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                            <img src="{{ album_item.image.url }}" class="d-block w-100" style="height: 500px; width: 200px; object-fit:cover;" alt="...">
                                         </div>
+                                        {% endfor %}
                                     </div>
+                                    <a class="carousel-control-prev" href="#portfolioCarousel{{ item.id }}" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#portfolioCarousel{{ item.id }}" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        {% endfor %}
                     </div>
                 </div>
+                {% endfor %}
             </div>
-        </section>
-        
-        
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </div>
+    </div>
+</section>
 
-        <!-- End portfolio -->
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<!-- End portfolio -->
+
         <!-- Testimonials -->
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-              }
-              
-              /*--- Testimonial Section Start ---*/
-              
-              .testimonial-section {
-                margin-top: 90px;
-              }
-              
-              .testimonial-heading {
-                font-size: 40px;
-                font-family: var(--font-family-heading--);
-                font-weight: 500;
+    <style>
+            .heading {
+                text-align: center;
+                color: #454343;
+                font-size: 30px;
+                font-weight: 700;
+                position: relative;
+                margin-bottom: 70px;
                 text-transform: uppercase;
-              }
-              
-              .services-inner {
-                display: flex;
-                justify-content: center;
-              }
-              
-              .services-icons {
-                width: 100%;
-                object-fit: fill;
-              }
-              
-              .testimonial-name {
-                font-size: 24px;
-                font-family: var(--font-family-heading--);
-                font-weight: 500;
-                text-transform: capitalize;
-                text-align: center;
-              }
-              
-              .fa-star {
-                color: #ff7a00;
-                font-size: 23px;
-                padding-bottom: 10px;
-              }
-              
-              .testimonial-cards-text {
-                font-size: 26px;
-                font-family: var(--font-family-details--);
-                font-weight: 500;
-                color: #9a9a9a;
-                text-align: center;
-                padding-bottom: 20px;
-              }
-              
-              @media (max-width: 1200px) {
-                .testimonial-cards-text br {
-                  display: none;
-                }
-              
-                .testimonial-cards-text {
-                  font-size: 18px;
-                }
-              }
-              
-              .progress-container {
-                width: 100%;
-                height: 8px;
-                display: flex;
-                justify-content: center;
+                z-index: 999;
+            }
+            .white-heading{
+                color: #ffffff;
+            }
+            .heading:after {
+                content: ' ';
                 position: absolute;
-                bottom: 0;
+                top: 100%;
+                left: 50%;
+                height: 40px;
+                width: 180px;
+                border-radius: 4px;
+                transform: translateX(-50%);
+                background: url(img/heading-line.png);
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+            .white-heading:after {
+                background: url(https://i.ibb.co/d7tSD1R/heading-line-white.png);
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+            
+            .heading span {
+                font-size: 18px;
+                display: block;
+                font-weight: 500;
+            }
+            .white-heading span {
+                color: #ffffff;
+            }
+            /*-----Testimonial-------*/
+            
+            .testimonial:after {
+                position: absolute;
+                top: -0 !important;
                 left: 0;
-              }
-              
-              .swiper {
-                padding: 70px 0;
-              }
-              .progres-bar {
-                width: 3rem;
-                background-color: #d9d9d9;
-                margin-right: 15px;
-                border-radius: 10px;
-                cursor: pointer;
-              }
-              
-              .open {
-                background-color: black;
-                width: 10rem;
-              }
-              
-              /*--- Testimonial Section End ---*/
-              
-        </style>
-
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <!-- Swiper Css -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-        <!-- Swiper Css -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-
-        <section class="testimonial-section">
-            <!--Testimonial Section Start-->
-            <div class="container">
-                <div class="section-heading">
-                    <h3>
-                        <span>Testimonials</span>
-                    </h3>
-                </div>
-            <div class="row">
-                <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
+                content: " ";
+                background: url(img/testimonial.bg-top.png);
+                background-size: 100% 100px;
+                width: 100%;
+                height: 100px;
+                float: left;
+                z-index: 99;
+            }
+            
+            .testimonial {
+                min-height: 375px;
+                position: relative;
+                {% comment %} background: url(https://i.ibb.co/PTJDkgb/testimonials.jpg);
+                padding-top: 50px;
+                padding-bottom: 50px;
+                background-position: center;
+                    background-size: cover; {% endcomment %}
+            }
+            #testimonial4 .carousel-inner:hover{
+            cursor: -moz-grab;
+            cursor: -webkit-grab;
+            }
+            #testimonial4 .carousel-inner:active{
+            cursor: -moz-grabbing;
+            cursor: -webkit-grabbing;
+            }
+            #testimonial4 .carousel-inner .item{
+            overflow: hidden;
+            }
+            
+            .testimonial4_indicators .carousel-indicators{
+            left: 0;
+            margin: 0;
+            width: 100%;
+            font-size: 0;
+            height: 20px;
+            bottom: 15px;
+            padding: 0 5px;
+            cursor: e-resize;
+            overflow-x: auto;
+            overflow-y: hidden;
+            position: absolute;
+            text-align: center;
+            white-space: nowrap;
+            }
+            .testimonial4_indicators .carousel-indicators li{
+            padding: 0;
+            width: 14px;
+            height: 14px;
+            border: none;
+            text-indent: 0;
+            margin: 2px 3px;
+            cursor: pointer;
+            display: inline-block;
+            background: #ffffff;
+            -webkit-border-radius: 100%;
+            border-radius: 100%;
+            }
+            .testimonial4_indicators .carousel-indicators .active{
+            padding: 0;
+            width: 14px;
+            height: 14px;
+            border: none;
+            margin: 2px 3px;
+            background-color: #9dd3af;
+            -webkit-border-radius: 100%;
+            border-radius: 100%;
+            }
+            .testimonial4_indicators .carousel-indicators::-webkit-scrollbar{
+            height: 3px;
+            }
+            .testimonial4_indicators .carousel-indicators::-webkit-scrollbar-thumb{
+            background: #eeeeee;
+            -webkit-border-radius: 0;
+            border-radius: 0;
+            }
+            
+            .testimonial4_control_button .carousel-control{
+            top: 175px;
+            opacity: 1;
+            width: 40px;
+            bottom: auto;
+            height: 40px;
+            font-size: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            overflow: hidden;
+            line-height: 38px;
+            text-shadow: none;
+            text-align: center;
+            position: absolute;
+            background: transparent;
+            border: 2px solid #ffffff;
+            text-transform: uppercase;
+            -webkit-border-radius: 100%;
+            border-radius: 100%;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            -webkit-transition: all 0.6s cubic-bezier(0.3,1,0,1);
+            transition: all 0.6s cubic-bezier(0.3,1,0,1);
+            }
+            .testimonial4_control_button .carousel-control.left{
+            left: 7%;
+            top: 50%;
+            right: auto;
+            }
+            .testimonial4_control_button .carousel-control.right{
+            right: 7%;
+            top: 50%;
+            left: auto;
+            }
+            .testimonial4_control_button .carousel-control.left:hover,
+            .testimonial4_control_button .carousel-control.right:hover{
+            color: #000;
+            background: #fff;
+            border: 2px solid #fff;
+            }
+            
+            .testimonial4_header{
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 550px;
+            display: block;
+            margin: 30px auto;
+            text-align: center;
+            position: relative;
+            }
+            .testimonial4_header h4{
+            color: #ffffff;
+            font-size: 30px;
+            font-weight: 600;
+            position: relative;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            }
+            
+            .testimonial4_slide{
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 70%;
+            margin: auto;
+            padding: 20px;
+            position: relative;
+            text-align: center;
+            }
+            .testimonial4_slide img {
+                top: 0;
+                left: 0;
+                right: 0;
+                width: 136px;
+                height: 136px;
+                margin: auto;
+                display: block;
+                color: #f2f2f2;
+                font-size: 18px;
+                line-height: 46px;
+                text-align: center;
+                position: relative;
+                border-radius: 50%;
+                box-shadow: -6px 6px 6px rgba(0, 0, 0, 0.23);
+                -moz-box-shadow: -6px 6px 6px rgba(0, 0, 0, 0.23);
+                -o-box-shadow: -6px 6px 6px rgba(0, 0, 0, 0.23);
+                -webkit-box-shadow: -6px 6px 6px rgba(0, 0, 0, 0.23);
+            }
+            .testimonial4_slide p {
+                color: #8d8e8f;
+                font-size: 20px;
+                line-height: 1.4;
+                margin: 40px 0 20px 0;
+            }
+            .testimonial4_slide h4 {
+            color: #ffffff;
+            font-size: 22px;
+            }
+            
+            .testimonial .carousel {
+                padding-bottom:50px;
+            }
+            .testimonial .carousel-control-next-icon, .testimonial .carousel-control-prev-icon {
+                width: 35px;
+                height: 35px;
+            }
+            /* ------testimonial  close-------*/
+    </style>
+        
+    <section class="testimonial">
+        <div class="container">
+    
+            <div class="section-heading" style="margin-top: 50px;">
+                <h3><span>Testimonial</span></h3>
+            </div>
+            <div id="testimonial4" class="carousel slide testimonial4_indicators testimonial4_control_button thumb_scroll_x swipe_x" data-ride="carousel" data-pause="hover" data-interval="3000" data-duration="1000">
+                <div class="carousel-inner" role="listbox">
+                    
                     {% for item in testimonial %}
-                    <div class="item swiper-slide">
-                    <div class="services-content">
-                        <div class="services-inner">
-                        <figure class="position-relative testimonial-img">
-                            <img src="{{item.image.url}}" alt="testimonial" class="img-fluid services-icons" style=" border-radius: 200px; height: 250px; width: 250px; object-fit:cover; " />
-                        </figure>
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <div class="testimonial4_slide">
+                            <img src="{{item.image.url}}" class="img-circle img-responsive" />
+                            <p>{{item.description}}</p>
+                            <h4>{{item.name}}</h4>
                         </div>
-                        <div class="services-card-content text-center">
-                        <h4 class="testimonial-name mb-0">{{item.name}}</h4>
-                            <p class="testimonial-cards-text">
-                            {{item.description}}
-                            </p>
-                        </div>
-                    </div>
                     </div>
                     {% endfor %}
                 </div>
-                <div class="progress-container">
-                    <span class="progres-bar"></span>
-                    <span class="progres-bar"></span>
-                    <span class="progres-bar"></span>
-                    <span class="progres-bar"></span>
-                </div>
-                </div>
+                <a class="carousel-control-prev" href="#testimonial4" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#testimonial4" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
             </div>
-            </div>
-        </section>
+        </div>
+    </section>
+    
 
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-        <script src="https://kit.fontawesome.com/a2f3cdbc85.js" crossorigin="anonymous"></script>
-        </script>
-        </script>
-
-        <script>
-            var swiper = new Swiper(".mySwiper", {
-                spaceBetween: 30,
-                centeredSlides: true,
-                autoplay: {
-                delay: 5000,
-                disableOnInteraction: false
-                },
-                pagination: {
-                el: ".swiper-pagination",
-                clickable: true
-                },
-                grabCursor: true
-            });
-            
-            function updateProgressBar() {
-                var activeIndex = swiper.realIndex;
-                var progressBars = document.querySelectorAll(".progres-bar");
-                progressBars.forEach(function (progressBar, index) {
-                if (index === activeIndex) {
-                    progressBar.classList.add("open");
-                } else {
-                    progressBar.classList.remove("open");
-                }
-                });
-            }
-            
-            // Call updateProgressBar function when page loads
-            updateProgressBar();
-            
-            swiper.on("slideChange", function () {
-                updateProgressBar();
-            });
-            
-            // Add click event listeners to progress bars
-            var progressBars = document.querySelectorAll(".progress-bar");
-            progressBars.forEach(function (progressBar, index) {
-                progressBar.addEventListener("click", function () {
-                swiper.slideTo(index);
-                });
-            });
-            
-        </script>
 
         <!-- End Testimonials -->
         <!-- contactus -->
@@ -644,8 +721,8 @@
                                             <i class="bi-chat-left-dots-fill"></i>
                                         </div>
                                         <div class="text">
-                                            <label>Chat to us</label>
-                                            <p>Our friendly team is there to help. <span><a class="text-reset" href="mailto:info@domainname.com">{{personaldetail.email}}</a></span></p>
+                                            <label>Reach us</label>
+                                            <p>I will respond to your mail. <span><a class="text-reset" href="mailto:info@domainname.com">{{personaldetail.email}}</a></span></p>
                                         </div>
                                     </li>
                                     <li>
@@ -654,7 +731,7 @@
                                         </div>
                                         <div class="text">
                                             <label>Visit us</label>
-                                            <p> Come say hello at our office HQ. <span>Warnwe Park Streetperrine, <br> {{personaldetail.address}}</span></p>
+                                            <p> Come say hello at our office. <span>{{personaldetail.companyName}}, <br> {{personaldetail.address}}</span></p>
                                         </div>
                                     </li>
                                     <li>
@@ -663,7 +740,7 @@
                                         </div>
                                         <div class="text">
                                             <label>Call us</label>
-                                            <p>Mon-Fri from 8am to 5pm. <span>{{personaldetail.phone}}</span></p>
+                                            <p>Sun-Fri from 10am to 6pm. <span>{{personaldetail.phone}}</span></p>
                                         </div>
                                     </li>
                                 </ul>
@@ -1046,7 +1123,7 @@
         <div class="container">
             <div class="footer-info">
                 <div class="footer-avatar">
-                    <img src="{% static 'app/assets/img/mask.jpg' %}" title="" alt="">
+                <img src="{{personaldetail.image.url}}" title="" alt="">
                 </div>
                 <h6>{{personaldetail.firstname}} {{personaldetail.lastname}}</h6>
             </div>

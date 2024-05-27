@@ -13,6 +13,8 @@ class PersonalDetail(models.Model):
     twiterUrl = models.URLField()
     instagramUrl = models.URLField()
     description = models.TextField()
+    companyName = models.CharField(max_length=200)
+    image = models.FileField(upload_to="smallImage")
 
 
     def __str__(self):
@@ -34,7 +36,7 @@ class Service(models.Model):
 
 class Album(models.Model):
     title = models.CharField(max_length=50)
-    image = models.FileField(upload_to="albumimage")
+    image = models.ImageField(upload_to="Albumimage")
 
     def __str__(self):
         return self.title
@@ -43,8 +45,8 @@ class Album(models.Model):
         ordering = ['-id']
 
 class Gallery(models.Model):
-    album = models.ForeignKey(Album, on_delete= models.SET_NULL,null=True, blank=True,  related_name ='hostings')
-    image = models.FileField(upload_to="galleryimage")
+    gallery = models.ForeignKey(Album, on_delete= models.SET_NULL,null=True, blank=True,  related_name ='albums')
+    image = models.ImageField(upload_to="galleryimage")
     class Meta:
         ordering = ['-id']
 
@@ -65,6 +67,8 @@ class About(models.Model):
     title=models.CharField(max_length=200)
     subtitle=models.CharField(max_length=200)
     description=RichTextField()
+    completedProject = models.CharField(max_length=400)
+    satisfiedClient = models.CharField(max_length=400)
 
     def __str__(self):
         return self.title
@@ -95,6 +99,28 @@ class Testimonial(models.Model):
 
     def __str__(self):
         return self.name
+
+class CompanyDescription(models.Model):
+    time = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
+    icon = models.ImageField(upload_to="companydescriptionimage")
+    description = RichTextField()
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['-id']
+
+class Herobanner(models.Model):
+    image = models.ImageField(upload_to="herobannerimage")
+    smallImage = models.ImageField(upload_to="smallImage")
+    subDescription = models.CharField(max_length=400)
+    description = RichTextField()
+    
+    def __str__(self):
+        return self.subDescription
+        
 
 
 

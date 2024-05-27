@@ -62,6 +62,12 @@ Personal Details
                                          </div> 
 
                                          <div class="mb-3">
+                                            <label class="form-label">Your Company's Name</label>
+                                            <input type="text" name="{{ form.companyName.name }}" id="{{ form.companyName.id_for_label }}" class="form-control"
+                                            value="{% if instance %}{{ instance.companyName }}{% endif %}" placeholder="Enter companyName">
+                                         </div>
+
+                                         <div class="mb-3">
                                             <label class="form-label">Phone</label>
                                             <input type="text" name="{{ form.phone.name }}" id="{{ form.phone.id_for_label }}" class="form-control"
                                             value="{% if instance %}{{ instance.phone }}{% endif %}" placeholder="Enter phone number">
@@ -78,16 +84,16 @@ Personal Details
                                                 <label class="form-label">Email</label>
                                                 <input type="email" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}" class="form-control"
                                                 value="{% if instance %}{{ instance.email }}{% endif %}" placeholder="Enter email">
-                                             </div>
+                                            </div>
 
                                             
                                             <div class="mb-3">
                                                 <label class="form-label">Phone number</label>
                                                 <input type="number" name="{{ form.phone.name }}" id="{{ form.phone.id_for_label }}" class="form-control"
                                                 value="{% if instance %}{{ instance.phone }}{% endif %}" placeholder="Enter phone">
-                                             </div>
+                                            </div>
                                         </div>
-                                          <!-- input -->
+                                        <!-- input -->
                                         </div>
                                         <div class="col-xl-6">
 
@@ -113,9 +119,16 @@ Personal Details
                                                 <input type="url" name="{{ form.instagramUrl.name }}" id="{{ form.instagramUrl.id_for_label }}" class="form-control"
                                                 value="{% if instance %}{{ instance.instagramUrl }}{% endif %}" placeholder="Enter instagramUrl">
                                              </div>
-                                             
-                                             
 
+
+                                             <div class="mb-3">
+                                                <label for="{{ form.image.id_for_label }}" class="form-label">Image for bottom part:</label>
+                                                <input type="file" name="{{ form.image.name }}" id="{{ form.image.id_for_label }}" class="form-control" {% if not instance %}required{% endif %} onchange="showPreview(this);">
+                                                <div id="imageContainer" style="width:auto; height:auto;">
+                                                    <img class="img-fluid" id="imagePreview" src="{% if instance %}{{ instance.image.url }}{% endif %}" alt="" >
+                                                </div>
+                                            </div>
+                                            
                                         </div>
                                           <div class="col-lg-12">
                                              {% if instance %}

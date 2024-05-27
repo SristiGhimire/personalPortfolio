@@ -293,6 +293,128 @@ class AppointmentDeleteView(View):
         return redirect('dashboard:Appointment')
 
 
+def create_or_edit_album(request, album_id=None):
+    if album_id:
+        album_instance = get_object_or_404(Album, id=album_id)
+        GalleryFormSet = inlineformset_factory(Album, Gallery, form=GalleryForm, extra=1)
+    else:
+        album_instance = Album()
+        GalleryFormSet = inlineformset_factory(Album, Gallery, form=GalleryForm,extra=1)
+    if request.method == 'POST':
+        album_form = AlbumForm(request.POST, instance=album_instance)
+        formset = GalleryFormSet(request.POST, instance=album_instance)
+        if album_form.is_valid() and formset.is_valid():
+            album_instance = album_form.save()
+            formset.instance = album_instance
+            formset.save()
+            if album_id:
+                messages.success(request, 'Album Updated successfully.')
+                return redirect('dashboard:edit_Album', album_id=album_instance.id)
+            else:
+                messages.success(request, 'Album added successfully.')
+                return redirect('dashboard:add_Album')
+    else:
+        album_form = AlbumForm(instance=album_instance)
+        formset = GalleryFormSet(instance=album_instance)
+    context = {
+        'album_form': album_form,
+        'formset': formset,
+        'is_inline_formset_used': True,
+    }
+    return render(request, 'app2/create_Album.html', context)
+
+
+class AlbumListView(View):
+    template_name = 'app2/Album.html'
+    def get(self, request):
+        prod = Album.objects.all()
+        return render(request, self.template_name, {'details': prod})
+
+class AlbumDeleteView(View):
+    template_name = 'app2/Album.html'
+    def get(self, request, id):
+        record = get_object_or_404(Album, id=id)
+        return render(request, self.template_name, {'details': record})
+    def post(self, request, id):
+        record = get_object_or_404(Album, id=id)
+        record.delete()
+        return redirect('dashboard:Album')
+
+
+@login_required 
+def add_edit_CompanyDescription(request, id=None):
+    instance = None
+    try:
+        if id:
+            instance = CompanyDescription.objects.get(pk=id)
+    except Exception as e:
+        messages.warning(request, 'An error occurred while retrieving the CompanyDescription.')
+        return redirect('dashboard:add_CompanyDescription')
+    if request.method == 'POST':
+        form = CompanyDescriptionForm(request.POST, request.FILES, instance=instance)
+        if form.is_valid():
+            form.save()
+            if instance:  # Edit operation
+                messages.success(request, 'CompanyDescription edited successfully.')
+                return redirect('dashboard:edit_CompanyDescription', id=instance.id)  # Redirect to the edited CompanyDescription's details page
+            else:  # Add operation
+                messages.success(request, 'CompanyDescription added successfully.')
+                return redirect('dashboard:add_CompanyDescription')  # Redirect to the page for adding new CompanyDescriptions
+        else:
+            messages.warning(request, 'Form is not valid. Please correct the errors.')
+    else:
+        form = CompanyDescriptionForm(instance=instance)
+    context = {'form': form, 'instance': instance}
+    return render(request, 'app2/create_CompanyDescription.html', context)
+
+class CompanyDescriptionListView(View):
+    template_name = 'app2/CompanyDescription.html'
+    def get(self, request):
+        prod = CompanyDescription.objects.all()
+   
+        return render(request, self.template_name, {'details': prod})
+
+class CompanyDescriptionDeleteView(View):
+    template_name = 'app2/CompanyDescription.html'
+    def get(self, request, id):
+        record = get_object_or_404(CompanyDescription, id=id)
+        return render(request, self.template_name, {'details': record})
+    def post(self, request, id):
+        record = get_object_or_404(CompanyDescription, id=id)
+        record.delete()
+        return redirect('dashboard:CompanyDescription')
+
+
+
+def HeroBanners(request):
+    instance = None
+    try:
+        if id:
+            instance = Herobanner.objects.first()
+    except Exception as e:
+        messages.warning(request, 'An error occurred while retrieving the HeroBanner.')
+        return redirect('dashboard:HeroBanner')
+    if request.method == 'POST':
+        form = HerobannerForm(request.POST, request.FILES, instance=instance)
+        if form.is_valid():
+            form.save()
+            if instance:  # Edit operation
+                messages.success(request, 'HeroBanner edited successfully.')
+                return redirect('dashboard:add_HeroBanner')  # Redirect to the edited HeroBanner's details page
+            else:  # Add operation
+                messages.success(request, 'HeroBanner added successfully.')
+                return redirect('dashboard:add_HeroBanner')  # Redirect to the page for adding new HeroBanner
+        else:
+            messages.warning(request, 'Form is not valid. Please correct the errors.')
+    else:
+        form = HerobannerForm(instance=instance)
+    context = {'form': form, 'instance': instance}
+    return render(request, 'app2/create_HeroBanner.html', context)
+
+
+
+
+
 
 
 

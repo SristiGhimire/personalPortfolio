@@ -35,15 +35,26 @@ Appointments
                                         <div class="table-responsive"style="overflow-x: auto; width: 100%;" >
                                             <table class="table table-striped dt-responsive w-100 " id="">
                                                         <th >Id</th>
+                                                        <th>Name</th>
+                                                        <th>Phone</th>
                                                         <th>StartDate</th>
                                                         <th style="width: 120px;">Action</th>
                                                     </tr>
-                                      {%for item in details%}
+                                    {%for item in details%}
 
                                         <tr>
                                             <td>
                                                 {{forloop.counter}}
                                             </td>
+
+                                            <td>
+                                                {{item.name}}
+                                            </td>
+
+                                            <td>
+                                                {{item.phone}}
+                                            </td>
+
                                             <td>
                                                 {{item.startdate}}
                                             </td>
