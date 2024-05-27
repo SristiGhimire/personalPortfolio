@@ -110,21 +110,21 @@
                                 <a id="book-appointment-btn" class="px-btn px-btn-theme" href="javascript:void(0);">
                                     Book Appointment for digital marketing<i class="fas fa-calendar-check icon"></i>
                                 </a>
-                                <form id="appointment-form" action="/" method="post" style="display: none;">
+                                <form id="appointment-form" action="{% url 'app:appointment' %}" method="post" style="display: none;">
                                     {% csrf_token %}
                                     <section id="appointment">
                                         <section id="appointment">
                                             <div class="mb-3">
                                                 <label class="form-label" for="name">Name</label>
-                                                <input type="text" style="background-color: white;" placeholder="Enter name" name="name" id="name" class="form-control" required>
+                                                <input type="text" style="" placeholder="Enter name" name="name" id="name" class="form-control" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label" for="phone">Contact Number</label>
-                                                <input type="number" style="background-color: white;" name="phone" placeholder="Enter Contact number" id="phone" class="form-control" required>
+                                                <input type="number" style="" name="phone" placeholder="Enter Contact number" id="phone" class="form-control" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label" for="startdate">Book date and time</label>
-                                                <input type="datetime-local" style="background-color: white;" name="startdate" id="startdate" class="form-control" required>
+                                                <input type="datetime-local" style="" name="startdate" id="startdate" class="form-control" required>
                                             </div>
                                             <button type="submit" class="px-btn px-btn-theme">Book Appointment</button>
                                         </section>
@@ -140,8 +140,6 @@
                                     document.getElementById('appointment-form').style.display = 'block';
                                 });
                             </script>
-                            
-                            
                             
                         </div>
                     </div>

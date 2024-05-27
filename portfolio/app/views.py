@@ -35,24 +35,39 @@ def contact(request):
     else:
         return render(request, 'app/index.html')
 
+# def appointment(request):
+#     if request.method == 'POST':
+#         form = AppointmentForm(request.POST)
+#         if form.is_valid():
+#             name = form.cleaned_data['name']
+#             phone = form.cleaned_data['phone']
+#             startdate = form.cleaned_data['startdate']
+
+#             book = Appointment.objects.create(
+#                 name=name,
+#                 phone=phone,
+#                 startdate=startdate,
+#                 )
+
+#             book.save()
+#             return redirect('app:index')
+#     else:
+#         form = AppointmentForm()
+#         return render(request, 'app/index.html',{'form': form})
+
+
 def appointment(request):
     if request.method == 'POST':
         form = AppointmentForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            phone = form.cleaned_data['phone']
-            startdate = form.cleaned_data['startdate']
-
-            book = Appointment.objects.create(
-                name=name,
-                phone=phone,
-                startdate=startdate,
-                )
-
-            book.save()
+            form.save()
             return redirect('app:index')
     else:
         form = AppointmentForm()
-        return render(request, 'app/index.html',{'form': form})
+    return render(request, 'app/index.html', {'form': form})
+
+
+
+
 
 
