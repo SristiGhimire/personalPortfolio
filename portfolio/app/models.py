@@ -12,9 +12,11 @@ class PersonalDetail(models.Model):
     facebookUrl = models.URLField()
     twiterUrl = models.URLField()
     instagramUrl = models.URLField()
-    description = models.TextField()
+    whatsappUrl = models.URLField()
+    description = RichTextField()
     companyName = models.CharField(max_length=200)
     image = models.FileField(upload_to="smallImage")
+    mapUrl = models.URLField()
 
 
     def __str__(self):
@@ -36,7 +38,7 @@ class Service(models.Model):
 
 class Album(models.Model):
     title = models.CharField(max_length=50)
-    image = models.ImageField(upload_to="Albumimage")
+    image = models.FileField(upload_to="albumimage/")
 
     def __str__(self):
         return self.title
@@ -46,12 +48,12 @@ class Album(models.Model):
 
 class Gallery(models.Model):
     gallery = models.ForeignKey(Album, on_delete= models.SET_NULL,null=True, blank=True,  related_name ='albums')
-    image = models.ImageField(upload_to="galleryimage")
+    image = models.FileField(upload_to="galleryimage")
     class Meta:
         ordering = ['-id']
-
 class Contact(models.Model):
     name = models.CharField(max_length=50)
+    contact = models.IntegerField()
     email = models.EmailField()
     subject = models.CharField(max_length=50)
     message = models.TextField()
@@ -66,6 +68,7 @@ class About(models.Model):
     image=models.FileField(upload_to="aboutimage")
     title=models.CharField(max_length=200)
     subtitle=models.CharField(max_length=200)
+    subdescription = models.CharField(max_length=400)
     description=RichTextField()
     completedProject = models.CharField(max_length=400)
     satisfiedClient = models.CharField(max_length=400)
@@ -95,7 +98,7 @@ class Client(models.Model):
 class Testimonial(models.Model):
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to="testimonialimage")
-    description = models.TextField()
+    description = RichTextField(null=False, blank=False)
 
     def __str__(self):
         return self.name
@@ -114,7 +117,6 @@ class CompanyDescription(models.Model):
 
 class Herobanner(models.Model):
     image = models.ImageField(upload_to="herobannerimage")
-    smallImage = models.ImageField(upload_to="smallImage")
     subDescription = models.CharField(max_length=400)
     description = RichTextField()
     

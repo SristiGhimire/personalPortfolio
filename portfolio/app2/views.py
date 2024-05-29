@@ -115,48 +115,6 @@ class ServiceDeleteView(View):
         record.delete()
         return redirect('dashboard:Service')
 
-@login_required
-def add_edit_Gallery(request, id=None):
-    instance = None
-    try:
-        if id:
-            instance = Gallery.objects.get(pk=id)
-    except Exception as e:
-        messages.warning(request, 'An error occurred while retrieving the Gallery.')
-        return redirect('dashboard:add_Gallery')
-    if request.method == 'POST':
-        form = GalleryForm(request.POST, request.FILES, instance=instance)
-        if form.is_valid():
-            form.save()
-            if instance:  # Edit operation
-                messages.success(request, 'Gallery edited successfully.')
-                return redirect('dashboard:edit_Gallery', id=instance.id)  # Redirect to the edited Gallery's details page
-            else:  # Add operation
-                messages.success(request, 'Gallery added successfully.')
-                return redirect('dashboard:add_Gallery')  # Redirect to the page for adding new Gallerys
-        else:
-            messages.warning(request, 'Form is not valid. Please correct the errors.')
-    else:
-        form = GalleryForm(instance=instance)
-    context = {'form': form, 'instance': instance}
-    return render(request, 'app2/create_Gallery.html', context)
-
-class GalleryListView(View):
-    template_name = 'app2/Gallery.html'
-    def get(self, request):
-        prod = Gallery.objects.all()
-   
-        return render(request, self.template_name, {'details': prod})
-
-class GalleryDeleteView(View):
-    template_name = 'app2/Gallery.html'
-    def get(self, request, id):
-        record = get_object_or_404(Gallery, id=id)
-        return render(request, self.template_name, {'details': record})
-    def post(self, request, id):
-        record = get_object_or_404(Gallery, id=id)
-        record.delete()
-        return redirect('dashboard:Gallery')
 
 
 @login_required 
@@ -292,7 +250,7 @@ class AppointmentDeleteView(View):
         record.delete()
         return redirect('dashboard:Appointment')
 
-
+@login_required 
 def create_or_edit_album(request, album_id=None):
     if album_id:
         album_instance = get_object_or_404(Album, id=album_id)
@@ -301,8 +259,8 @@ def create_or_edit_album(request, album_id=None):
         album_instance = Album()
         GalleryFormSet = inlineformset_factory(Album, Gallery, form=GalleryForm,extra=1)
     if request.method == 'POST':
-        album_form = AlbumForm(request.POST, instance=album_instance)
-        formset = GalleryFormSet(request.POST, instance=album_instance)
+        album_form = AlbumForm(request.POST,request.FILES, instance=album_instance)
+        formset = GalleryFormSet(request.POST,request.FILES, instance=album_instance)
         if album_form.is_valid() and formset.is_valid():
             album_instance = album_form.save()
             formset.instance = album_instance
@@ -385,7 +343,7 @@ class CompanyDescriptionDeleteView(View):
         return redirect('dashboard:CompanyDescription')
 
 
-
+@login_required 
 def HeroBanners(request):
     instance = None
     try:

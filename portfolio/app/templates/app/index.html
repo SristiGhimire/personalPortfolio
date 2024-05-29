@@ -13,7 +13,7 @@
     <meta name="keywords" content="Tapsi - Portfolio Template">
     <meta name="description" content="Tapsi - Portfolio Template">
     <!-- title -->
-    <title>Tapsi - Portfolio Template</title>
+    <title>Asish Jha</title>
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <!-- theme css -->
@@ -31,8 +31,8 @@
             <!-- Brand -->
             <div class="logo">
                 <a class="navbar-brand" href="#">
-                    <img class="logo-dark" title="" alt="" src="{% static 'app/assets/img/logo.svg' %}">
-                    <img class="logo-light" title="" alt="" src="{% static 'app/assets/img/logo-light.svg' %}">
+                    <img class="logo-dark" title="" alt="" src="{{personaldetail.logo.url}}">
+                    <img class="logo-light" title="" alt="" src="{{personaldetail.logo.url}}">
                 </a>
             </div>
             <div class="ms-auto">
@@ -47,8 +47,8 @@
         <!-- Brand -->
         <div class="logo">
             <a class="navbar-brand" href="#">
-                <img class="logo-dark" title="" alt="" src="{% static 'app/assets/img/logo.svg' %}">
-                <img class="logo-light" title="" alt="" src="{% static 'app/assets/img/logo-light.svg' %}">
+                <img class="logo-dark" title="" alt="" src="{{personaldetail.logo.url}}">
+                <img class="logo-light" title="" alt="" src="{{personaldetail.logo.url}}">
             </a>
         </div>
         <!-- / -->
@@ -86,7 +86,15 @@
                 </a>
             </li>
             <li>
-                <a data-scroll-nav="4" href="#contactus">
+                <a data-scroll-nav="4" href="#testimonial">
+                    <span class="m-icon">
+                        <i class="fas fa-quote-left testimonial-icon"></i>
+                    </span>
+                    <span class="m-text">Testimonial</span>
+                </a>
+            </li>
+            <li>
+                <a data-scroll-nav="5" href="#contactus">
                     <span class="m-icon">
                         <i class="bi-telephone"></i>
                     </span>
@@ -117,8 +125,8 @@
                     <div class="col-lg-6 ps-xl-5 mb-5 mb-lg-0">
                         <div class="home-intro">
                             <h6>👋 {{herobanner.subDescription}}</h6>
-                            <h1>{{personaldetail.firstName}}<span><img src="{{herobanner.smallImage.url}}" title="" alt=""></span>{{personaldetail.lastName}}</h1>
-                            <p class="pe-lg-5">{{herobanner.description}}</p>
+                            <h1>{{personaldetail.firstName}} {{personaldetail.lastName}}</h1>
+                            <p class="pe-lg-5">{{herobanner.description|safe}}</p>
                             <div class="btn-bar">
                                 <a id="book-appointment-btn" class="px-btn px-btn-theme" href="javascript:void(0);">
                                     Book Appointment for digital marketing<i class="fas fa-calendar-check icon"></i>
@@ -168,7 +176,7 @@
                                     <path d="M44.4879 2.72729C18.0681 -8.74866 -8.74539 18.0655 2.73027 44.486L4.62443 48.8556C6.3577 52.8463 7.2521 57.1507 7.2521 61.5015C7.2521 65.8524 6.3577 70.1568 4.62443 74.1475L2.7272 78.5141C-8.74847 104.935 18.065 131.749 44.491 120.273L48.8574 118.375C52.848 116.642 57.1523 115.748 61.5031 115.748C65.8538 115.748 70.1581 116.642 74.1488 118.375L78.5152 120.273C104.932 131.749 131.748 104.935 120.273 78.511L118.376 74.1445C116.642 70.1537 115.748 65.8493 115.748 61.4985C115.748 57.1476 116.642 52.8432 118.376 48.8525L120.273 44.486C131.748 18.0655 104.935 -8.74866 78.5121 2.72729L74.1457 4.62457C70.1551 6.35788 65.8508 7.25231 61.5 7.25231C57.1492 7.25231 52.8449 6.35788 48.8543 4.62457L44.4879 2.72729Z" fill="var(--px-theme)" />
                                 </svg>
                             </div> {% endcomment %}
-                            <img src="{{about.image.url}}" title="" alt="">
+                            <img src="{{herobanner.image.url}}" title="" alt="">
                         </div>
                     </div>
                 </div>
@@ -176,6 +184,8 @@
         </section>
         <!-- End Home -->
         <!-- About -->
+        
+
         <section id="about" data-scroll-index="1" class="section about-section gray-bg-1">
             <div class="container">
                 <div class="about-me">
@@ -186,7 +196,7 @@
                             </div>
                             <div class="about-me-text pb-5">
                                 <h3>{{about.subtitle}}</h3>
-                                <h5><span>I Am Available</span> For UI UX Design Projects</h5>
+                                <h5><span>{{about.subdescription}}</h5>
                                 <p>{{about.description|safe}}</p>
                                 <div class="row pt-2">
                                     <div class="col-auto">
@@ -216,11 +226,14 @@
                                         </div>
                                         <span class="time">{{item.time}}</span>
                                         <h5>{{item.title}}</h5>
-                                        <p>{{item.description}}</p>
+                                        <p>{{item.description|safe}}</p>
+                                        {% comment %} <a href="javascript:void(0);" class="read-more-link" data-description="{{ item.description|safe }}">Read More</a> {% endcomment %}
                                     </li>
                                     {% endfor %}
                                 </ul>
                             </div>
+
+                            
                         </div>
                         <div class="col-lg-7 sticky-lg-top ps-xl-5">
                             <div class="row align-items-start">
@@ -234,18 +247,18 @@
                                         <ul>
                                             <li>
                                                 <div class="a-icon">
-                                                    <i class="fab fa-skype"></i>
+                                                    <i class="fab fa-twitter"></i>
                                                 </div>
                                                 <div class="a-text">
-                                                    <a class="text-reset stretched-link" href="#">Skype me</a>
+                                                    <a class="text-reset stretched-link" href="{{personaldetail.twiterUrl}}">Twitter</a>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="a-icon">
-                                                    <i class="fa fa-envelope"></i>
+                                                    <i class="fab fa-linkedin linkedin-icon"></i>
                                                 </div>
                                                 <div class="a-text">
-                                                    <a class="text-reset stretched-link" href="#">Mail Me</a>
+                                                    <a class="text-reset stretched-link" href="{{personaldetail.linkedinUrl}}">LinkedIn</a>
                                                 </div>
                                             </li>
                                             <li>
@@ -253,97 +266,190 @@
                                                     <i class="fab fa-whatsapp"></i>
                                                 </div>
                                                 <div class="a-text">
-                                                    <a class="text-reset stretched-link" href="#">WhatsApp Me</a>
+                                                    <a class="text-reset stretched-link" href="{{personaldetail.whatsappUrl}}">WhatsApp Me</a>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="a-icon">
-                                                    <i class="fa fa-map"></i>
+                                                    <i class="fab fa-instagram"></i>
                                                 </div>
                                                 <div class="a-text">
-                                                    <a class="text-reset stretched-link" href="#">Meet Me</a>
+                                                    <a class="text-reset stretched-link" href="{{personaldetail.instagramUrl}}">Instagram</a>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="a-icon">
-                                                    <i class="fa-solid fa-file-pdf"></i>
+                                                    <i class="fab fa-facebook"></i>
                                                 </div>
                                                 <div class="a-text">
-                                                    <a class="text-reset stretched-link" href="#">Resume</a>
+                                                    <a class="text-reset stretched-link" href="{{personaldetail.facebookUrl}}">Facebook</a>
                                                 </div>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
-                                {% comment %} <div class="col-12 py-4">
-                                    <div class="title-01">
-                                        <span>Skills</span>
-                                    </div>
-                                    <div class="skills">
-                                        <div class="skill-lt">
-                                            <h6 class="dark-color">HTML5</h6>
-                                            <div class="skill-bar">
-                                                <div class="skill-bar-in" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100">
-                                                    <span>92%</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="skill-lt">
-                                            <h6 class="dark-color">WordPress</h6>
-                                            <div class="skill-bar">
-                                                <div class="skill-bar-in" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100">
-                                                    <span>75%</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="skill-lt">
-                                            <h6 class="dark-color">Magento</h6>
-                                            <div class="skill-bar">
-                                                <div class="skill-bar-in" role="progressbar" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100">
-                                                    <span>86%</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="skill-lt">
-                                            <h6 class="dark-color">UI/UX</h6>
-                                            <div class="skill-bar">
-                                                <div class="skill-bar-in" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
-                                                    <span>88%</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> {% endcomment %}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
+
+            
         <!-- End About -->
+
+
         <!-- Services -->
-        <section id="services" data-scroll-index="2" class="section services-section">
-            <div class="container">
-                <div class="section-heading">
-                    <h3>
-                        <span>MY SERVICES</span>
-                    </h3>
-                </div>
-                <div class="row gy-4">
-                    {% for item in service %}
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="feature-box-01">
-                            <div class="icon"><img src="{{item.logo.url}}" title="" alt=""></div>
-                            <div class="feature-content">
-                                <h5>{{item.title}}</h5>
-                                <p>{{item.description|safe|truncatewords:15}}</p>
-                            </div>
+
+<style>
+    /* Popup container - can be anything you want */
+    .service-popup {
+        display: none; 
+        position: fixed; 
+        z-index: 1; 
+        padding-top: 100px; 
+        left: 0;
+        top: 0;
+        width: 100%; 
+        height: 100%; 
+        overflow: auto; 
+        background-color: rgb(0,0,0); 
+        background-color: rgba(0,0,0,0.4); 
+    }
+    
+    /* Popup content */
+    .popup-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+    }
+    
+    /* Responsive image in the popup */
+    .popup-content img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Popup title */
+    .popup-content h5 {
+        color: black; /* Change title color to black */
+    }
+    
+    /* Popup description */
+    .popup-content p {
+        margin-top: 10px;
+        color: black; /* Change description color to black */
+    }
+    
+    /* Close button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    
+</style>
+<section id="services" data-scroll-index="2" class="section services-section">
+    <div class="container">
+        <div class="section-heading">
+            <h3>
+                <span>MY SERVICES</span>
+            </h3>
+        </div>
+        <div class="row gy-4">
+            {% for item in service %}
+            <div class="col-sm-6 col-lg-4">
+                <div class="feature-box-01" data-service-id="{{ item.id }}">
+                    <div class="icon"><img src="{{ item.logo.url }}" title="" alt=""></div>
+                    <div class="feature-content">
+                        <h5>{{ item.title }}</h5>
+                        <p>{{ item.description|safe|truncatewords:15 }}</p>
+                        <a class="read-more-btn px-btn px-btn-theme" href="javascript:void(0);" data-service-id="{{ item.id }}">
+                            Read More
+                        </a>
+                        <div class="full-description" style="display: none;">
+                            {{ item.description|safe }}
                         </div>
                     </div>
-                    {% endfor %}
                 </div>
             </div>
-        </section>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Popup Container -->
+<div id="service-popup" class="service-popup">
+    <div class="popup-content">
+        <span class="close">&times;</span>
+        <div class="popup-details">
+            <h5 id="popup-title"></h5>
+            <img id="popup-logo" src="" alt="">
+            <p id="popup-description"></p>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get the popup element
+        var popup = document.getElementById("service-popup");
+        var popupTitle = document.getElementById("popup-title");
+        var popupLogo = document.getElementById("popup-logo");
+        var popupDescription = document.getElementById("popup-description");
+        var closeBtn = document.getElementsByClassName("close")[0];
+    
+        // Attach click event to each "Read More" button
+        document.querySelectorAll('.read-more-btn').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var serviceId = this.getAttribute('data-service-id');
+                var serviceBox = document.querySelector('.feature-box-01[data-service-id="' + serviceId + '"]');
+                var serviceData = {
+                    title: serviceBox.querySelector('h5').innerText,
+                    logo: serviceBox.querySelector('img').src,
+                    description: serviceBox.querySelector('.full-description').innerHTML
+                };
+    
+                // Populate the popup with the service details
+                popupTitle.innerText = serviceData.title;
+                popupLogo.src = serviceData.logo;
+                popupDescription.innerHTML = serviceData.description;
+    
+                // Show the popup
+                popup.style.display = "block";
+            });
+        });
+    
+        // Close the popup when the close button is clicked
+        closeBtn.addEventListener('click', function() {
+            popup.style.display = "none";
+        });
+    
+        // Close the popup when clicking outside the popup content
+        window.addEventListener('click', function(event) {
+            if (event.target == popup) {
+                popup.style.display = "none";
+            }
+        });
+    });
+    </script>
+    
+
         <!-- End Services -->
 <!-- portfolio -->
 
@@ -382,13 +488,12 @@
                 <!-- Portfolio Item -->
                 <div class="col-sm-6 col-lg-4 grid-item">
                     <div class="portfolio-box">
-                        <div class="portfolio-text">
+                        <div class="portfolio-text" style="margin-inline-start: -20px;">
                             <h6>{{ item.title }}</h6>
-                            {% comment %} <p>{{ item.get_description_display }}</p> {% endcomment %}
                             <a class="gallery-link" href="#" data-toggle="modal" data-target="#portfolioModal{{ item.id }}"><i class="bi-arrow-up-right-circle"></i></a>
                         </div>
                         <div class="portfolio-img">
-                            <img src="{{ item.image.url }}" title="{{ item.title }}" alt="" style="height:250px; width: 400px; ">
+                            {% if item.image %} <img src="{{item.image.url }}" title="{{ item.title }}" alt="" style="height:250px; width: 400px; ">{%endif%}
                         </div>
                     </div>
                 </div>
@@ -675,20 +780,20 @@
             /* ------testimonial  close-------*/
     </style>
         
-    <section class="testimonial">
+    <section class="testimonial" data-scroll-index="4">
         <div class="container">
     
             <div class="section-heading" style="margin-top: 50px;">
                 <h3><span>Testimonial</span></h3>
             </div>
-            <div id="testimonial4" class="carousel slide testimonial4_indicators testimonial4_control_button thumb_scroll_x swipe_x" data-ride="carousel" data-pause="hover" data-interval="3000" data-duration="1000">
+            <div id="testimonial4" class="carousel slide testimonial4_indicators testimonial4_control_button thumb_scroll_x swipe_x" data-ride="carousel" data-pause="hover" data-interval="2500" data-duration="100">
                 <div class="carousel-inner" role="listbox">
                     
                     {% for item in testimonial %}
                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
                         <div class="testimonial4_slide">
                             <img src="{{item.image.url}}" class="img-circle img-responsive" />
-                            <p>{{item.description}}</p>
+                            <p>{{item.description|safe}}</p>
                             <h4>{{item.name}}</h4>
                         </div>
                     </div>
@@ -707,8 +812,10 @@
 
 
         <!-- End Testimonials -->
+
+
         <!-- contactus -->
-        <section id="contactus" data-scroll-index="4" class="section contactus-section gray-bg-1">
+        <section id="testimonial" data-scroll-index="5" class="section contactus-section gray-bg-1">
             <div class="container">
                 <div class="row gy-5">
                     <div class="col-lg-5 d-flex">
@@ -745,8 +852,8 @@
                                     </li>
                                 </ul>
                                 <div class="google-map mt-5">
-                                    <div class="ratio ratio-21x9">
-                                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3151.840107317064!2d144.955925!3d-37.817214!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb6899234e561db11!2sEnvato!5e0!3m2!1sen!2sin!4v1520156366883" allowfullscreen=""></iframe>
+                                    <div class="ratio ratio-21x9" style="height: 300px;">
+                                        <iframe src="{{personaldetail.mapUrl}}" allowfullscreen="" ></iframe>
                                     </div>
                                 </div>
                             </div>
@@ -763,7 +870,7 @@
                                 <div class="row gx-3 gy-4">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label">First name</label>
+                                            <label class="form-label">Your name</label>
                                             <input name="name" id="name" placeholder="Name *" class="form-control" type="text">
                                         </div>
                                     </div>
@@ -771,6 +878,12 @@
                                         <div class="form-group">
                                             <label class="form-label">Your Email</label>
                                             <input name="email" id="email" placeholder="Email *" class="form-control" type="email">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Contact</label>
+                                            <input name="phone" id="phone" placeholder="phone *" class="form-control" type="number">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -799,325 +912,7 @@
         </section>
         <!-- End contactus -->
     </main>
-    <!-- Main -->
-    <!-- Snigle 1 -->
-    <div id="project_1" class="px-modal mfp-hide">
-        <div class="single-project-box">
-            <div class="row align-items-start">
-                <div class="col-lg-7">
-                    <div class="row g-2">
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-2.jpg' %}" title="" alt="">
-                        </div>
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-3.jpg' %}" title="" alt="">
-                        </div>
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-4.jpg' %}" title="" alt="">
-                        </div>
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-1.jpg' %}" title="" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 pt-4 pt-lg-0">
-                    <h4>Website Design for Marketing Agency Startup</h4>
-                    <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <div class="about-content">
-                        <ul>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Type:</span>
-                                <span>Website</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Langages:</span>
-                                <span>PHP, HTML, CSS, JS</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Platform:</span>
-                                <span>WordPress</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Country:</span>
-                                <span>USA</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Live URL:</span>
-                                <span>www.example.com</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Snigle 1 -->
-    <!-- Snigle 2 -->
-    <div id="project_2" class="px-modal mfp-hide">
-        <div class="single-project-box">
-            <div class="row align-items-start">
-                <div class="col-lg-7">
-                    <div class="row g-2">
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-2.jpg' %}" title="" alt="">
-                        </div>
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-3.jpg' %}" title="" alt="">
-                        </div>
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-4.jpg' %}" title="" alt="">
-                        </div>
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-1.jpg' %}" title="" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 pt-4 pt-lg-0">
-                    <h4>Website Design for Marketing Agency Startup</h4>
-                    <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <div class="about-content">
-                        <ul>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Type:</span>
-                                <span>Website</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Langages:</span>
-                                <span>PHP, HTML, CSS, JS</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Platform:</span>
-                                <span>WordPress</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Country:</span>
-                                <span>USA</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Live URL:</span>
-                                <span>www.example.com</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Snigle 2 -->
-    <!-- Snigle 3 -->
-    <div id="project_3" class="px-modal mfp-hide">
-        <div class="single-project-box">
-            <div class="row align-items-start">
-                <div class="col-lg-7">
-                    <div class="row g-2">
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-3.jpg' %}" title="" alt="">
-                        </div>
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-2.jpg' %}" title="" alt="">
-                        </div>
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-4.jpg' %}" title="" alt="">
-                        </div>
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-1.jpg' %}" title="" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 pt-4 pt-lg-0">
-                    <h4>Website Design for Marketing Agency Startup</h4>
-                    <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <div class="about-content">
-                        <ul>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Type:</span>
-                                <span>Website</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Langages:</span>
-                                <span>PHP, HTML, CSS, JS</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Platform:</span>
-                                <span>WordPress</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Country:</span>
-                                <span>USA</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Live URL:</span>
-                                <span>www.example.com</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Snigle 3 -->
-    <!-- Snigle 4 -->
-    <div id="project_4" class="px-modal mfp-hide">
-        <div class="single-project-box">
-            <div class="row align-items-start">
-                <div class="col-lg-7">
-                    <div class="row g-2">
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-4.jpg' %}" title="" alt="">
-                        </div>
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-2.jpg' %}" title="" alt="">
-                        </div>
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-3.jpg' %}" title="" alt="">
-                        </div>
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-1.jpg' %}" title="" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 pt-4 pt-lg-0">
-                    <h4>Website Design for Marketing Agency Startup</h4>
-                    <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <div class="about-content">
-                        <ul>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Type:</span>
-                                <span>Website</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Langages:</span>
-                                <span>PHP, HTML, CSS, JS</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Platform:</span>
-                                <span>WordPress</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Country:</span>
-                                <span>USA</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Live URL:</span>
-                                <span>www.example.com</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Snigle 4 -->
-    <!-- Snigle 5 -->
-    <div id="project_5" class="px-modal mfp-hide">
-        <div class="single-project-box">
-            <div class="row align-items-start">
-                <div class="col-lg-7">
-                    <div class="row g-2">
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-4.jpg' %}" title="" alt="">
-                        </div>
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-2.jpg' %}" title="" alt="">
-                        </div>
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-3.jpg' %}" title="" alt="">
-                        </div>
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-1.jpg' %}" title="" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 pt-4 pt-lg-0">
-                    <h4>Website Design for Marketing Agency Startup</h4>
-                    <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <div class="about-content">
-                        <ul>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Type:</span>
-                                <span>Website</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Langages:</span>
-                                <span>PHP, HTML, CSS, JS</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Platform:</span>
-                                <span>WordPress</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Country:</span>
-                                <span>USA</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Live URL:</span>
-                                <span>www.example.com</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Snigle 5 -->
-    <!-- Snigle 5 -->
-    <div id="project_6" class="px-modal mfp-hide">
-        <div class="single-project-box">
-            <div class="row align-items-start">
-                <div class="col-lg-7">
-                    <div class="row g-2">
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-4.jpg' %}" title="" alt="">
-                        </div>
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-2.jpg' %}" title="" alt="">
-                        </div>
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-3.jpg' %}" title="" alt="">
-                        </div>
-                        <div class="col-6">
-                            <img class="border" src="{% static 'app/assets/img/project-1.jpg' %}" title="" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 pt-4 pt-lg-0">
-                    <h4>Website Design for Marketing Agency Startup</h4>
-                    <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <div class="about-content">
-                        <ul>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Type:</span>
-                                <span>Website</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Langages:</span>
-                                <span>PHP, HTML, CSS, JS</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Platform:</span>
-                                <span>WordPress</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Country:</span>
-                                <span>USA</span>
-                            </li>
-                            <li class="d-flex">
-                                <span class="col-4 col-lg-3">Live URL:</span>
-                                <span>www.example.com</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Snigle 6 -->
+    
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -1135,13 +930,17 @@
                     <a href="{{personaldetail.instagramUrl}}"><i class="fab fa-instagram"></i></a>
                 </li>
                 <li>
-                    <a href="{{personaldetailinstagramUrl}}"><i class="fab fa-facebook"></i></a>
+                    <a href="{{personaldetail.facebookUrl}}"><i class="fab fa-facebook"></i></a>
                 </li>
-                {% comment %} <li>
-                    <a href="#"><i class="fab fa-pinterest"></i></a>
-                </li> {% endcomment %}
+                <li>
+                    <a href="{{personaldetail.whatsappUrl}}"><i class="fab fa-whatsapp"></i></a>
+                </li>
+                <li>
+                    <a href="{{personaldetail.linkedinUrl}}"><i class="fab fa-linkedin linkedin-icon"></i></a>
+                </li>
+                
             </ul>
-            <p class="copyright">© 2023 copyright all right reserved</p>
+            <p class="copyright">© 2024 copyright all right reserved</p>
         </div>
     </footer>
     <!-- End Footer -->

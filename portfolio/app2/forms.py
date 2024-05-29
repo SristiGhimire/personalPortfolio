@@ -7,6 +7,9 @@ class ServiceForm(forms.ModelForm):
         model = Service
         fields = '__all__'
 
+
+    
+
 class AboutForm(forms.ModelForm):
     class Meta:
         model = About

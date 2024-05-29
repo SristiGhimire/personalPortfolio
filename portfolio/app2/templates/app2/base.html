@@ -67,6 +67,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <!--description is required(ckeditor)-->
+    <script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+    <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(event) {
+                const ckeditorContent = CKEDITOR.instances['id_description'].getData().trim();
+                if (!ckeditorContent) {
+                    alert('Description is required.');
+                    event.preventDefault();  // Prevent form submission
+                }
+            });
+        });
+    </script>
+
     <style>
         #imageContainer {
             max-width: 100%;

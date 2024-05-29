@@ -21,15 +21,16 @@ def index(request):
 def contact(request):
     if request.method == 'POST':
         name = request.POST.get('name')
+        phone = request.POST.get('phone')
         email = request.POST['email']
         message = request.POST['message']
         subject = request.POST['subject']
-        contact_obj = Contact(name = name, email = email, message = message, subject=subject)
+        contact_obj = Contact(name = name, email = email,contact=phone, message = message, subject=subject)
         contact_obj.save()
         
         # send mail with customer query
         email_subject = subject
-        message =f"User Name : {name} \nmessage : {message}"
+        message =f"User Name : {name} \nmessage : {message}\nPhone : {phone}"
         email_from = settings.EMAIL_HOST_USER
         user_email = [email]
         send_mail(subject, message, email_from, user_email)

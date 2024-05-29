@@ -46,13 +46,13 @@ About
                                           <div class="mb-3">
                                              <label class="form-label">title</label>
                                              <input type="text" name="{{ form.title.name }}" id="{{ form.title.id_for_label }}" class="form-control"
-                                             value="{% if instance %}{{ instance.title }}{% endif %}" placeholder="Enter title">
+                                             value="{% if instance %}{{ instance.title }}{% endif %}" placeholder="Enter title" required>
                                           </div>
 
                                           <div class="mb-3">
                                             <label class="form-label">Sub title</label>
                                             <input type="text" name="{{ form.subtitle.name }}" id="{{ form.subtitle.id_for_label }}" class="form-control"
-                                            value="{% if instance %}{{ instance.subtitle }}{% endif %}" placeholder="Enter sub-subtitle e.g My name is....">
+                                            value="{% if instance %}{{ instance.subtitle }}{% endif %}" placeholder="Enter sub-subtitle e.g My name is...." required>
                                          </div>
             
                                         
@@ -70,13 +70,19 @@ About
                                             <div class="mb-3">
                                                 <label class="form-label">Number of Completed Projects</label>
                                                 <input type="text" name="{{ form.completedProject.name }}" id="{{ form.completedProject.id_for_label }}" class="form-control"
-                                                value="{% if instance %}{{ instance.completedProject }}{% endif %}" placeholder="Enter completedProject">
+                                                value="{% if instance %}{{ instance.completedProject }}{% endif %}" placeholder="Enter completedProject" required>
                                              </div>
 
                                              <div class="mb-3">
                                                 <label class="form-label">Number of Satisfied Clients</label>
                                                 <input type="text" name="{{ form.satisfiedClient.name }}" id="{{ form.satisfiedClient.id_for_label }}" class="form-control"
-                                                value="{% if instance %}{{ instance.satisfiedClient }}{% endif %}" placeholder="Enter satisfiedClient">
+                                                value="{% if instance %}{{ instance.satisfiedClient }}{% endif %}" placeholder="Enter satisfiedClient" required>
+                                             </div>
+
+                                             <div class="mb-3">
+                                                <label class="form-label">Sub Description</label>
+                                                <input type="text" name="{{ form.subdescription.name }}" id="{{ form.subdescription.id_for_label }}" class="form-control"
+                                                value="{% if instance %}{{ instance.subdescription }}{% endif %}" placeholder="I am available for...." required>
                                              </div>
 
                                           <div class="mb-3">

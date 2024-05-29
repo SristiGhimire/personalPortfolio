@@ -63,7 +63,7 @@ Album
 
                                             <td>
                                                 <div class="image-album">
-                                                    <img class="thumbnail" src="{{item.image.url}}" alt="Thumbnail Image">
+                                                 {% if item.image %}   <img class="thumbnail" src="{{item.image.url}}" alt="Thumbnail Image">{%endif%}
                                                     <!-- Add more thumbnail images here if you have multiple images in the album -->
                                                 </div>
                                                 <div class="modal" id="imageModal">
@@ -169,4 +169,3 @@ Album
                     {% endblock %}
               
 {%endblock%}
-  

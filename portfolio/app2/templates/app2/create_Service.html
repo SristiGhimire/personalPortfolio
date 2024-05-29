@@ -4,6 +4,20 @@
 Service
 {% endblock %}
 {% block body %}
+<script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+    <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(event) {
+                const ckeditorContent = CKEDITOR.instances['id_description'].getData().trim();
+                if (!ckeditorContent) {
+                    alert('Description is required.');
+                    event.preventDefault();  // Prevent form submission
+                }
+            });
+        });
+    </script>
             <!-- Start Page Content here -->
 
             <div class="content-page">
@@ -45,7 +59,7 @@ Service
                                           <div class="mb-3">
                                              <label class="form-label">Title</label>
                                              <input type="text" name="{{ form.title.name }}" id="{{ form.title.id_for_label }}" class="form-control"
-                                             value="{% if instance %}{{ instance.title }}{% endif %}" placeholder="Enter title">
+                                             value="{% if instance %}{{ instance.title }}{% endif %}" placeholder="Enter title" required>
                                           </div>
             
                                         
@@ -68,6 +82,7 @@ Service
                                             <div class="mb-3">
                                                 <label class="form-label">Description</label>
                                                {{form.description}}
+                                               {{form.description.errors}}
                                              </div>
                                         </div>
                                           <div class="col-lg-12">

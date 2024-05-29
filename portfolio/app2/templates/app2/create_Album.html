@@ -79,6 +79,8 @@
                                     </div>
                                 {% endfor %}
                             {% endif %}
+
+                            {% comment %} {{form.errors}} {% endcomment %}
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
@@ -86,23 +88,24 @@
                                         <div class="row">
                                             {% comment %} <h3>album:</h3> {% endcomment %}
                                             <div class="col-xl-6">
+                                                {% comment %} {{album_form.as_p}} {% endcomment %}
                                                      <!-- Date View -->
                                                      <div class="mb-3">
                                                         <label for="{{ album_form.title.id_for_label }}" class="form-label">Title</label>
-                                                        <input type="text" name=" {{ album_form.title.name }}" id="{{ album_form.title.id_for_label }}" class="form-control" required
-                                                               value="{% if album_form.instance %}{{ album_form.instance.title }}{% endif %}" placeholder="Enter albumName">
+                                                        <input type="text" name="{{ album_form.title.name }}" id="{{ album_form.title.id_for_label }}" class="form-control" 
+                                                            value="{% if album_form.instance %}{{ album_form.instance.title }}{% endif %}" placeholder="Enter albumName" required>
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="col-xl-6">
-                                                    <div class="mb-3">
-                                                        <label for="{{ album_form.image.id_for_label }}" class="form-label">Logo :</label>
-                                                        <input type="file" name="{{ album_form.image.name }}" id="{{ album_form.image.id_for_label }}" class="form-control" {% if not instance %}required{% endif %} onchange="showPreview(this);">
-                                                        <div id="imageContainer" style="width:auto; height:auto;">
-                                                            <img class="img-fluid" id="imagePreview" src="{% if instance %}{{ instance.image.url }}{% endif %}" alt="" >
-                                                        </div>
+                                                <div class="mb-3">
+                                                    <label for="{{ form.image.id_for_label }}" class="form-label">image:</label>
+                                                    <input type="file" name="{{ album_form.image.name }}" id="{{ form.image.id_for_label }}" class="form-control" {% if not instance %}required{% endif %} onchange="showPreview(this);">
+                                                    <div id="imageContainer" style="width:auto; height:auto;">
+                                                        <img class="img-fluid" id="imagePreview" src="{% if instance %}{{ instance.image.url }}{% endif %}" alt="" >
                                                     </div>
                                                 </div>
+                                            </div>
 
                                                 <div class="col-xl-12">
                                                 <h3>Fields:</h3>
