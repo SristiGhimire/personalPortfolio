@@ -16,6 +16,7 @@ class PersonalDetail(models.Model):
     description = RichTextField()
     companyName = models.CharField(max_length=200)
     image = models.FileField(upload_to="smallImage")
+    favicon = models.FileField(upload_to="Favicon")
     mapUrl = models.URLField()
 
 
