@@ -176,7 +176,7 @@
                                 </span> {% endcomment %}
                                 <span class="d-lg-flex flex-column gap-1 d-none">
                                     {% comment %} <h5 class="my-0"> {{request.user.fullname}}</h5> {% endcomment %}
-                                    <h5 class="my-0">{{request.user.firstname}}</h5>
+                                    <h5 class="my-0" style="text-transform: uppercase;">{{request.user.firstname}}</h5>
                                     {% comment %} <h6 class="my-0 fw-normal">{{request.user.email}}</h6> {% endcomment %}
                                     <h6 class="my-0 fw-normal">{{request.user.email}}</h6>
                                 </span>
@@ -185,7 +185,7 @@
                                 <!-- item-->
                                 <div class=" dropdown-header noti-title">
                                     {% comment %} <h6 class="text-overflow m-0">Welcome {{request.user.fullname}}!</h6> {% endcomment %}
-                                 <h6 class="text-overflow m-0">Welcome to dashboard</h6>
+                                 <h6 class="text-overflow m-0" style="text-transform: uppercase;">Welcome {{request.user.firstname}}</h6>
                                 </div>
                                 <a href="{% url 'useraccount:change_password' %}" class="dropdown-item">
                                     <a href="{% url 'useraccount:change_password' %}" class="dropdown-item">
