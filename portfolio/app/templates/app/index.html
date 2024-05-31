@@ -31,8 +31,8 @@
             <!-- Brand -->
             <div class="logo">
                 <a class="navbar-brand" href="#">
-                    <img class="logo-dark" title="" alt="" src="{{personaldetail.logo.url}}">
-                    <img class="logo-light" title="" alt="" src="{{personaldetail.logo.url}}">
+                    <img class="logo-dark" title="" alt="" src="{{personaldetail.logo.url}}" style="height: 45px;">
+                    <img class="logo-light" title="" alt="" src="{{personaldetail.logo.url}}" style="height: 45px;">
                 </a>
             </div>
             <div class="ms-auto">
@@ -47,8 +47,8 @@
         <!-- Brand -->
         <div class="logo">
             <a class="navbar-brand" href="#">
-                <img class="logo-dark" title="" alt="" src="{{personaldetail.logo.url}}">
-                <img class="logo-light" title="" alt="" src="{{personaldetail.logo.url}}">
+                <img class="logo-dark" title="" alt="" src="{{personaldetail.logo.url}}" style="height: 45px;">
+                <img class="logo-light" title="" alt="" src="{{personaldetail.logo.url}}" style="height: 45px;">
             </a>
         </div>
         <!-- / -->
@@ -122,6 +122,11 @@
         <section id="home" data-scroll-index="0" class="home-section">
             <div class="container">
                 <div class="row align-items-center min-vh-100 flex-row-reverse">
+                    <div class="col-lg-6">
+                        <div class="home-image text-center">
+                            <img src="{{herobanner.image.url}}" title="" alt="">
+                        </div>
+                    </div>
                     <div class="col-lg-6 ps-xl-5 mb-5 mb-lg-0">
                         <div class="home-intro">
                             <h6>👋 {{herobanner.subDescription}}</h6>
@@ -164,21 +169,7 @@
                             
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="home-image text-center">
-                            {% comment %} <div class="hi-icon-top">
-                                <svg width="123" height="123" viewBox="0 0 123 123" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M44.4879 2.72729C18.0681 -8.74866 -8.74539 18.0655 2.73027 44.486L4.62443 48.8556C6.3577 52.8463 7.2521 57.1507 7.2521 61.5015C7.2521 65.8524 6.3577 70.1568 4.62443 74.1475L2.7272 78.5141C-8.74847 104.935 18.065 131.749 44.491 120.273L48.8574 118.375C52.848 116.642 57.1523 115.748 61.5031 115.748C65.8538 115.748 70.1581 116.642 74.1488 118.375L78.5152 120.273C104.932 131.749 131.748 104.935 120.273 78.511L118.376 74.1445C116.642 70.1537 115.748 65.8493 115.748 61.4985C115.748 57.1476 116.642 52.8432 118.376 48.8525L120.273 44.486C131.748 18.0655 104.935 -8.74866 78.5121 2.72729L74.1457 4.62457C70.1551 6.35788 65.8508 7.25231 61.5 7.25231C57.1492 7.25231 52.8449 6.35788 48.8543 4.62457L44.4879 2.72729Z" fill="var(--px-theme)" />
-                                </svg>
-                            </div>
-                            <div class="hi-icon-bottom">
-                                <svg width="123" height="123" viewBox="0 0 123 123" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M44.4879 2.72729C18.0681 -8.74866 -8.74539 18.0655 2.73027 44.486L4.62443 48.8556C6.3577 52.8463 7.2521 57.1507 7.2521 61.5015C7.2521 65.8524 6.3577 70.1568 4.62443 74.1475L2.7272 78.5141C-8.74847 104.935 18.065 131.749 44.491 120.273L48.8574 118.375C52.848 116.642 57.1523 115.748 61.5031 115.748C65.8538 115.748 70.1581 116.642 74.1488 118.375L78.5152 120.273C104.932 131.749 131.748 104.935 120.273 78.511L118.376 74.1445C116.642 70.1537 115.748 65.8493 115.748 61.4985C115.748 57.1476 116.642 52.8432 118.376 48.8525L120.273 44.486C131.748 18.0655 104.935 -8.74866 78.5121 2.72729L74.1457 4.62457C70.1551 6.35788 65.8508 7.25231 61.5 7.25231C57.1492 7.25231 52.8449 6.35788 48.8543 4.62457L44.4879 2.72729Z" fill="var(--px-theme)" />
-                                </svg>
-                            </div> {% endcomment %}
-                            <img src="{{herobanner.image.url}}" title="" alt="">
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </section>
@@ -186,7 +177,7 @@
         <!-- About -->
         
 
-        <section id="about" data-scroll-index="1" class="section about-section gray-bg-1">
+        <section id="about" data-scroll-index="1" class="section about-section gray-bg-1" style="margin-top: -40px;">
             <div class="container">
                 <div class="about-me">
                     <div class="row align-items-start">

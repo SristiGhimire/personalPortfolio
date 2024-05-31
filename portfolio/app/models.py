@@ -13,6 +13,7 @@ class PersonalDetail(models.Model):
     twiterUrl = models.URLField()
     instagramUrl = models.URLField()
     whatsappUrl = models.URLField()
+    linkedinUrl = models.URLField()
     description = RichTextField()
     companyName = models.CharField(max_length=200)
     image = models.FileField(upload_to="smallImage")
