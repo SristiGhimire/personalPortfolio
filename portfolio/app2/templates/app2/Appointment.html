@@ -107,9 +107,8 @@ Appointments
                 
 
                 </div> <!-- content -->
-                	<!-- Delete Modal HTML -->
-          
-   
+            <!-- Delete Modal HTML -->
+
     {% block content %}
     {% for item in details %}
         <div class="modal fade"  id="AppointmentDeleteModel{{item.id}}"  tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -128,8 +127,7 @@ Appointments
                         </div>
                     </div>
                 </div>
-        
-                                </div>
+        </div>
                     {% endfor %}
                     <style>
                     /* static/css/custom.css */
@@ -149,5 +147,5 @@ Appointments
                             $('#AppointmentdeleteModal').modal('show');
                         });
                     </script>
-                    {% endblock %}
+                {% endblock %}
 {%endblock%}
